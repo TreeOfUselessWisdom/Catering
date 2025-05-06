@@ -1,0 +1,378 @@
+﻿@{
+    Layout = "_Layout";
+
+    ViewData["Title"] = "Delicious Catering";
+}
+
+
+    
+    @section FullWidthTop {
+        <!-- HERO SECTION WITH AVAILABILITY CHECK -->
+        <header id="hero" class="vh-100 d-flex align-items-center" style="background: url('/img/Hero.jpg') center/cover no-repeat;">
+        <div class="container text-white text-center">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-8">
+                        <h1 class="display-4 fw-bold mb-4" data-aos="fade-up">Delicious Catering</h1>
+                        <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200">
+                            Crafting unforgettable culinary experiences for every occasion.
+                        </p>
+
+                        <!-- Availability Check Form -->
+                        <div class="hero-availability" data-aos="fade-up" data-aos-delay="400">
+                            <div class="bg-white rounded-3 p-4 shadow-lg">
+                                <h3 class="h5 text-white mb-4">Check Your Date</h3>
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-8">
+                                        <input type="date"
+                                               class="form-control form-control-lg"
+                                               id="eventDate"
+                                               min="<?= date('Y-m-d'); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <button class="btn btn-primary btn-lg w-100">
+                                            Check Availability
+                                        </button>
+                                    </div>
+                                </div>
+                                <small class="text-white d-block mt-3">Dates book quickly - reserve your spot today</small>
+                            </div>
+                        </div>
+
+                        <a href="#services" class="btn btn-outline-light btn-lg mt-5" data-aos="fade-up" data-aos-delay="600">
+                            Explore Services <i class="fas fa-utensils ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        }
+
+
+        <!-- SERVICES -->
+        <section id="services" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-5" data-aos="fade-up">What We Offer</h2>
+                <div class="row g-4">
+                    <!-- Corporate Events -->
+                    <div class="col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="card border-0 shadow-sm text-center h-100">
+                            <div class="card-body">
+                                <i class="fas fa-building fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Executive Business Catering</h5>
+                                <p class="card-text">
+                                    Comprehensive catering solutions for board meetings, product launches, and corporate retreats.
+                                    Features include gourmet breakfast spreads, chef-carved lunch stations, and afternoon tea services.
+                                    Our business packages include AV-equipped serving staff, branded dessert presentations,
+                                    and sustainable disposable ware. Specializing in last-minute orders and multi-day conference catering
+                                    with dedicated onsite coordinators.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weddings -->
+                    <div class="col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="card border-0 shadow-sm text-center h-100">
+                            <div class="card-body">
+                                <i class="fas fa-heart fa-3x mb-3 text-danger"></i>
+                                <h5 class="card-title">Luxury Wedding Experiences</h5>
+                                <p class="card-text">
+                                    Full-service wedding catering from rehearsal dinners to post-ceremony brunches.
+                                    Offers include champagne fountain setups, live cooking demonstrations, and custom cake design.
+                                    Package options feature gluten-free banquet alternatives, heritage recipe incorporation,
+                                    and international cuisine stations. Includes coordination with floral designers,
+                                    rental companies, and venue managers. Complimentary tasting sessions with our master sommelier.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Private Parties -->
+                    <div class="col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="card border-0 shadow-sm text-center h-100">
+                            <div class="card-body">
+                                <i class="fas fa-glass-cheers fa-3x mb-3 text-warning"></i>
+                                <h5 class="card-title">Bespoke Social Gatherings</h5>
+                                <p class="card-text">
+                                    Customized catering for anniversaries, milestone birthdays, and exclusive dinner parties.
+                                    Services include mixologist-curated cocktail pairings, interactive global street food carts,
+                                    and dessert degustation menus. Themed packages range from 1920s speakeasy setups to tropical
+                                    luau experiences. Includes full-service staffing with butler-passed hors d'oeuvres,
+                                    china rental coordination, and post-event cleanup. Optional add-ons: photo booth catering stations.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New Service: Non-Profit Events -->
+                    <div class="col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="card border-0 shadow-sm text-center h-100">
+                            <div class="card-body">
+                                <i class="fas fa-hand-holding-heart fa-3x mb-3 text-success"></i>
+                                <h5 class="card-title">Philanthropic Event Solutions</h5>
+                                <p class="card-text">
+                                    Cost-effective catering for galas, fundraisers, and community outreach programs.
+                                    Features budget-friendly buffet options, donation-matched meal programs,
+                                    and volunteer-staffed service stations. Specializes in large-scale operations
+                                    with capacity for 1,000+ guests. Includes branded serving ware, nutritional information displays,
+                                    and ADA-compliant food stations. Partner program available for recurring charitable events
+                                    with discounted rates for non-profit organizations.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMBINED MENU SECTIONS -->
+        <section id="menu" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <h2 class="display-5 fw-bold mb-3">Culinary Offerings</h2>
+                    <div class="d-flex justify-content-center gap-3 mb-4">
+                        <button class="btn btn-outline-primary active" data-menu-tab="featured">Featured Menu</button>
+                    </div>
+                </div>
+
+                <!-- Featured Menu -->
+                <div class="row g-4 menu-content" id="featured-menu">
+                    <div class="col-md-6" data-aos="fade-right">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    <img src="~/img/GardenSalad.png" class="img-fluid rounded-start" data-tooltip="Salad">
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <h5 class="card-title">Garden Fresh Salad</h5>
+                                            <span class="badge bg-primary fs-6">$8</span>
+                                        </div>
+                                        <p class="card-text">Crisp greens, heirloom tomatoes, and house vinaigrette</p>
+                                        <div class="d-flex gap-2">
+                                            <span class="badge bg-light text-dark">Vegetarian</span>
+                                            <span class="badge bg-light text-dark">GF Option</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat similar card structure for other items -->
+                </div>
+        </section>
+
+        <!-- CHEF'S SPOTLIGHT -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-md-5" data-aos="fade-right">
+                        <div class="ratio ratio-1x1">
+                            <img src="~/img/Chef.jpg" class="img-fluid rounded-circle shadow object-fit-cover" alt="Master Chef John Doe">
+                        </div>
+                    </div>
+                    <div class="col-md-7" data-aos="fade-left">
+                        <div class="ps-lg-5">
+                            <h2 class="display-6 fw-bold mb-4">Meet Chef Alejandro Martínez</h2>
+                            <div class="d-flex gap-3 mb-4">
+                                <div class="text-center">
+                                    <div class="fs-1 fw-bold text-primary">15+</div>
+                                    <div class="text-muted">Years Experience</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="fs-1 fw-bold text-primary">50+</div>
+                                    <div class="text-muted">Awards Won</div>
+                                </div>
+                            </div>
+                            <p class="lead mb-4">James Beard Award-winning chef blending Mediterranean flavors with California freshness.</p>
+                            <div class="signature mb-4">
+                                <img src="~/img/signature.png" alt="Chef's Signature" class="img-fluid" style="max-width: 200px;">
+                            </div>
+                            <a href="#contact" class="btn btn-outline-dark">Book Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SAFETY BADGE -->
+        <section class="py-5">
+            <div class="container">
+                <div class="safety-badge text-center">
+                    <img src="~/img/5-star-food-hygiene-certificate.png" alt="5-Star Hygiene Rating" class="mb-4" width="300" height="150">
+                    <h3>Certified Food Safety</h3>
+                    <p>HACCP certified kitchen · Allergy-aware staff · Daily temperature logs</p>
+                    <button class="btn btn-outline-secondary">View Certifications</button>
+                </div>
+            </div>
+        </section>
+
+        
+         <!-- SUSTAINABILITY -->
+<section class="py-5 bg-success text-white position-relative break-out">
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: url('~/img/leaf-pattern.png') repeat; opacity: 0.1;"></div>
+        <div class="container position-relative">
+                <h2 class="text-center mb-5 display-5 fw-bold">Sustainable Practices</h2>
+                <div class="row g-4">
+                    <div class="col-md-3" data-aos="zoom-in">
+                        <div class="card border-0 bg-white bg-opacity-10 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-seedling fa-3x mb-3"></i>
+                                <h4 class="mb-3">Local Sourcing</h4>
+                                <div class="progress mb-2" style="height: 8px;">
+                                    <div class="progress-bar bg-black" style="width: 85%"></div>
+                                </div>
+                                <p class="mb-0">85% ingredients from within 50 miles</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="card border-0 bg-white bg-opacity-10 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-recycle fa-3x mb-3"></i>
+                                <h4 class="mb-3">Zero Waste</h4>
+                                <p class="display-6 fw-bold mb-0">93%</p>
+                                <p class="mb-0">Waste diverted from landfills</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add 2 more eco cards -->
+                </div>
+            </div>
+        </section>
+        
+
+
+        <!-- GALLERY -->
+        <section id="gallery" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-5" data-aos="fade-up">Our Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item portrait" data-aos="zoom-in" data-aos-delay="100">
+                        <img src="~/img/Gallery2.jpg" class="img-fluid" data-tooltip="Chef's Special" loading="lazy">
+                    </div>
+                    <div class="gallery-item landscape" data-aos="zoom-in" data-aos-delay="150">
+                        <img src="~/img/Gallery8.jpg" class="img-fluid" data-tooltip="Event Setup" loading="lazy">
+                    </div>
+                    <div class="gallery-item square" data-aos="zoom-in" data-aos-delay="200">
+                        <img src="~/img/Gallery3.jpg" class="img-fluid" data-tooltip="Dessert Selection" loading="lazy">
+                    </div>
+                    <div class="gallery-item landscape" data-aos="zoom-in" data-aos-delay="250">
+                        <img src="~/img/Gallery4.jpg" class="img-fluid" data-tooltip="Buffet Presentation" loading="lazy">
+                    </div>
+                    <div class="gallery-item portrait" data-aos="zoom-in" data-aos-delay="300">
+                        <img src="~/img/Gallery7.jpg" class="img-fluid" data-tooltip="Cocktail Hour" loading="lazy">
+                    </div>
+                    <div class="gallery-item wide" data-aos="zoom-in" data-aos-delay="350">
+                        <img src="~/img/Gallery9.jpg" class="img-fluid" data-tooltip="Grand Banquet" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5 display-5 fw-bold">Client Experiences</h2>
+                <div class="row g-4">
+                    <div class="col-md-4" data-aos="fade-up">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="~/img/Man.jpg" class="rounded-circle me-3" width="200" height="200" alt="Sarah">
+                                    <div>
+                                        <h5 class="mb-0">Todd Bald</h5>
+                                        <small class="text-muted">Wedding Client</small>
+                                    </div>
+                                </div>
+                                <div class="rating text-warning mb-3">
+                                    ★★★★★
+                                </div>
+                                <blockquote class="ps-3 border-start border-3 border-primary">
+                                    "The most memorable dining experience of our lives..."
+                                </blockquote>
+                                <div class="mt-auto pt-3">
+                                    <small class="text-muted">June 2023 · 200 Guests</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- More testimonials -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="bg-light py-5">
+            <div class="container">
+                <h2 class="text-center mb-4" data-aos="fade-up">Get in Touch</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <form id="contactForm" novalidate data-aos="fade-up" data-aos-delay="200">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name*</label>
+                                <input type="text" class="form-control" id="name" required>
+                                <div class="invalid-feedback">Please enter your name.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email*</label>
+                                <input type="email" class="form-control" id="email" required>
+                                <div class="invalid-feedback">Please enter a valid email.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message*</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                                <div class="invalid-feedback">Please enter a message.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" data-tooltip="Contact us for more information">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+    
+
+    <!-- BACK TO TOP & ACCESSIBILITY BUTTONS -->
+    <div class="fixed-buttons">
+        <button id="accessibilityBtn" title="Accessibility"><i class="fas fa-universal-access"></i></button>
+        <button id="backToTop" title="Back to top"><i class="fas fa-chevron-up"></i></button>
+    </div>
+
+    <!-- ACCESSIBILITY PANEL -->
+    <div id="accessibilityPanel" class="accessibility-panel">
+        <h6>Accessibility</h6>
+        <div class="accessibility-grid">
+            <!-- Update the text size indicator HTML -->
+            <button class="accessibility-option" data-feature="textEnlarge">
+                <i class="fas fa-text-height"></i>
+                <span>Text Size</span>
+                <div class="text-size-indicator">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </button>
+            <button class="accessibility-option" data-feature="hideImages">
+                <i class="fas fa-image-slash"></i>
+                <span>Hide Images</span>
+            </button>
+            <button class="accessibility-option" data-feature="pauseAnimations">
+                <i class="fas fa-pause-circle"></i>
+                <span>Pause Anim.</span>
+            </button>
+            <button class="accessibility-option" data-feature="tooltips">
+                <i class="fas fa-info-circle"></i>
+                <span>Tooltips</span>
+            </button>
+            <button class="accessibility-option" data-feature="highlightLinks">
+                <i class="fas fa-link"></i>
+                <span>Highlight Links</span>
+            </button>
+        </div>
+    </div>
+
+
