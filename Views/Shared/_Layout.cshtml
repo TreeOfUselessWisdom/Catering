@@ -1,25 +1,20 @@
-﻿@using Catering.Models
+﻿@using System.Security.Claims
+@inject UserManager<Catering.Models.ApplicationUser> UserManager
+@using Catering.Models
 @using Microsoft.AspNetCore.Identity
-@using System.Security.Claims
-@inject UserManager<ApplicationUser> UserManager
 
 @{
-    // 1) Try your local FullName
-    var currentUser = await UserManager.GetUserAsync(User);
-    string? displayName = currentUser?.FullName;
+    // get the ApplicationUser record
+    var user = await UserManager.GetUserAsync(User);
 
-    // 2) If empty, try the Google "name" claim
-    if (string.IsNullOrEmpty(displayName))
-    {
-        displayName = User.FindFirst(ClaimTypes.Name)?.Value;
-    }
-
-    // 3) Finally fall back to email/username
-    if (string.IsNullOrEmpty(displayName))
-    {
-        displayName = currentUser?.Email ?? User.Identity.Name;
-    }
+    // pick FullName (registered or Google), else Name claim, else fallback to username
+    var displayName = user?.FullName
+                      ?? User.FindFirst(ClaimTypes.Name)?.Value
+                      ?? User.Identity?.Name
+                      ?? "Welcome";
 }
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,11 +46,11 @@
             {
                 <span class="me-3">@displayName</span>
             }
-        <button id="menuToggle" class="btn btn-link menu-icon">
-            <i class="fas fa-bars fa-2x"></i>
-        </button>
+            <button id="menuToggle" class="btn btn-link menu-icon"><i class="fas fa-bars fa-2x"></i></button>
         </div>
     </nav>
+
+
 
     <!-- OVERLAY MENU -->
     <div id="overlayMenu">

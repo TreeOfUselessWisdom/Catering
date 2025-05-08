@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Catering.Data;
 using Catering.Models;
 using Microsoft.EntityFrameworkCore;
@@ -54,10 +55,10 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 
 
-
+builder.Services.AddSingleton<IEmailSender, LocalEmailSender>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, LocalEmailSender>();
+
 
 var app = builder.Build();
 

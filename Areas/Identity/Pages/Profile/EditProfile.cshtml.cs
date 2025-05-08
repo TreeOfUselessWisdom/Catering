@@ -10,10 +10,14 @@ using Microsoft.AspNetCore.Authorization;
 public class EditProfileModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager; 
 
-    public EditProfileModel(UserManager<ApplicationUser> userManager)
+    public EditProfileModel(
+        UserManager<ApplicationUser> userManager, 
+        SignInManager<ApplicationUser> signInManager) 
     {
         _userManager = userManager;
+        _signInManager = signInManager; 
     }
 
     [BindProperty]
@@ -66,5 +70,13 @@ public class EditProfileModel : PageModel
 
         TempData["StatusMessage"] = "Profile updated successfully!";
         return RedirectToPage();
+    }
+
+    public async Task<IActionResult> OnPostDeleteAsync()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        await _signInManager.SignOutAsync();
+        await _userManager.DeleteAsync(user);
+        return RedirectToPage("/Index");
     }
 }
