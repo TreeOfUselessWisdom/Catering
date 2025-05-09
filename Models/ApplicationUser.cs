@@ -10,5 +10,8 @@ namespace Catering.Models
 
         // Cancellation policy, as percentage fee deducted
         public int CancellationFeePercent { get; set; }
+ 
+        // Maximum number of guests this caterer can handle
+        public int Capacity { get; set; } = 50;
     }
 }

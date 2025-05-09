@@ -1,0 +1,40 @@
+﻿@model Catering.Models.ViewModels.CatererSearchViewModel
+
+@{
+   ViewData["Title"] = "Find a Caterer";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="get" class="row g-3 mb-4">
+   <div class="col-md-5">
+       <label asp-for="Location" class="form-label"></label>
+       <input asp-for="Location" class="form-control" />
+   </div>
+   <div class="col-md-3">
+       <label asp-for="NumGuests" class="form-label"></label>
+       <input asp-for="NumGuests" class="form-control" type="number" min="1" />
+   </div>
+   <div class="col-md-2 align-self-end">
+       <button type="submit" class="btn btn-primary">Search</button>
+   </div>
+</form>
+
+@if (Model.Results.Any())
+{
+   <div class="list-group">
+       @foreach (var c in Model.Results)
+       {
+           <a asp-controller="Caterer" asp-action="Details" asp-route-id="@c.Id"
+              class="list-group-item list-group-item-action mb-2">
+               <h5 class="mb-1">@c.FullName</h5>
+               <p class="mb-1">@c.Address</p>
+               <small>Minimum capacity: @c.MinGuests guests</small>
+           </a>
+       }
+   </div>
+}
+else if (Context.Request.QueryString.HasValue)
+{
+   <p>No caterers found.</p>
+}

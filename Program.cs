@@ -70,6 +70,7 @@ using (var scope = app.Services.CreateScope())
     await IdentitySeed.SeedAdminAsync(services);
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
+
     // Seed roles 
     string[] roleNames = { "Customer", "Caterer" };
     foreach (var roleName in roleNames)
@@ -81,6 +82,28 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+
+    if (!db.ItemCategories.Any())
+    {
+        var buffet = new ItemCategory { Name = "Buffet", Description = "Hot & cold buffet items" };
+        var apps = new ItemCategory { Name = "Appetizers", Description = "Finger foods & starters" };
+        var dess = new ItemCategory { Name = "Desserts", Description = "Cakes & sweets" };
+
+        db.ItemCategories.AddRange(buffet, apps, dess);
+        db.SaveChanges();
+
+        db.Items.AddRange(
+          new Item { Name = "Chicken Korma", Description = "Food", Price = 12.5m, CategoryId = buffet.CategoryId },
+          new Item { Name = "Fries", Description = "Just potatoes", Price = 5.0m, CategoryId = apps.CategoryId },
+          new Item { Name = "Chocolate Cake", Description = "Sweet!", Price = 6.75m, CategoryId = dess.CategoryId }
+        );
+        db.SaveChanges();
+    }
+}
 
 
 

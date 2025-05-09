@@ -1,0 +1,58 @@
+﻿@using Catering.Models.ViewModels
+@model BookingCreateViewModel
+
+@{
+    ViewData["Title"] = "Place Booking";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" method="post" class="row g-3">
+
+    @* Hidden fields to carry over CatererId & ItemId *@
+    <input asp-for="CatererId" type="hidden" />
+    <input asp-for="ItemId" type="hidden" />
+
+    <div class="col-md-6">
+        <label asp-for="CatererName" class="form-label">Caterer</label>
+        <input asp-for="CatererName" class="form-control" readonly />
+    </div>
+
+    <div class="col-md-3">
+        <label asp-for="ItemName" class="form-label">Item</label>
+        <input asp-for="ItemName" class="form-control" readonly />
+    </div>
+
+    <div class="col-md-3">
+        <label asp-for="Price" class="form-label">Unit Price</label>
+        <input asp-for="Price" class="form-control" readonly />
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="Date" class="form-label">Date</label>
+        <input asp-for="Date" class="form-control" type="date" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="Venue" class="form-label">Venue</label>
+        <input asp-for="Venue" class="form-control" />
+        <span asp-validation-for="Venue" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="NumGuests" class="form-label">Number of Guests</label>
+        <input asp-for="NumGuests" class="form-control" type="number" min="50" />
+        <span asp-validation-for="NumGuests" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Confirm Booking</button>
+        <a asp-action="Search" asp-controller="Caterer" class="btn btn-secondary ms-2">Back to Search</a>
+    </div>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

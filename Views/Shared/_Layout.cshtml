@@ -55,33 +55,59 @@
     <!-- OVERLAY MENU -->
     <div id="overlayMenu">
         <ul class="overlay-links list-unstyled text-center">
+
+            @* — AUTHENTICATED USER LINKS — *@
             @if (User.Identity.IsAuthenticated)
             {
                 <li class="nav-item">
-                    <form id="logoutForm" method="post" asp-area="Identity" asp-page="/Account/Logout"></form>
+                    <form id="logoutForm" method="post" asp-area="Identity" asp-page="/Account/Logout" class="d-none"></form>
                     <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit();">Logout</a>
                 </li>
-            }
-            else
-            {
-                <li class="nav-item"><a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-                <li class="nav-item"><a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-            }
-            @if (User.Identity.IsAuthenticated)
-            {
                 <li class="nav-item">
                     <a class="nav-link" asp-area="Identity" asp-page="/Profile/EditProfile">Edit Profile</a>
                 </li>
+
+                @* Customer‑only *@
+                @if (User.IsInRole("Customer"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Caterer" asp-action="Search">Find Caterers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Booking" asp-action="MyBookings">My Bookings</a>
+                    </li>
+                }
+
+                @* Caterer‑only *@
+                @if (User.IsInRole("Caterer"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Booking" asp-action="Index" asp-area="">Manage Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="ItemCategory" asp-action="Index">Manage Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Item" asp-action="Index">Manage Items</a>
+                    </li>
+                }
+            }
+            else
+            {
+                @* anonymous *@
+                <li class="nav-item"><a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
             }
 
-
-            <li><a class="nav-link" href="#hero">Home</a></li>
-            <li><a class="nav-link" href="#services">Services</a></li>
-            <li><a class="nav-link" href="#menu">Menu</a></li>
-            <li><a class="nav-link" href="#gallery">Gallery</a></li>
-            <li><a class="nav-link" href="#contact">Contact</a></li>
+            @* — public anchor links — *@
+            <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+            <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
     </div>
+
         
 
     @RenderSection("FullWidthTop", required: false)

@@ -1,3 +1,6 @@
 5/8/2025 6:37:22 PM: test@gmail.com - Reset Password
 Please reset your password by <a href='https://localhost:7049/Identity/Account/ResetPassword?code=Q2ZESjhDMzRCT1lJVGxsTHRad29rSHZHK3ZVdkRiNThqMFZVQk82cWRtempXSk1WZjNJVCs3c3dubzllV2FZclFKcWxTdmlsUVMzT0tveTVMMm5DZWQ2OVgrcEJwd0IrNVVOWWlVMy8zZlphelc2cEUzd1VnQmdBM2JRL0IrUGNmNFZJcXJVeFVteXlCS0pOUHk2YkVpNm96RTZydk16YVd0aW1BQkdYdm1QWm5WUDZkN1FTNTdvYjlUV1g3Q21BcjExRjhiV2Y4Y1RxdDh2R0RNMitMNklRM3dKb2wzUDV6ZnlscG5ybWV6eTZtV1dI'>clicking here</a>.
 
+5/9/2025 9:09:08 PM: test@gmail.com - Reset Password
+Please reset your password by <a href='https://localhost:7049/Identity/Account/ResetPassword?code=Q2ZESjhDMzRCT1lJVGxsTHRad29rSHZHK3ZWNmhSL001Ukd1VUhJNzZJVG1sV2ZucWg1Q3ljM1ppUy9maDNSUjA1cmJjVGFqeWdmempKRVhETkJzN0s0Zmg5MTRQem9obHU5bEdFOHBSQkZIeFJjZzNGNjhPRmQwN2Vad1dmUUwzc2NwVlpmcm13VEwyTlhvZUhhMW5GRnZseThMU3VqQ2RvNEMwd2p3RDhQN0JLRmNOOWhZMzBPOEZOVGdnbHB1V2xFeUJoV3dYeXRsZ3U4ZCtDNDVvK3A2c2R0bzkva3B4NnpJZVB0YTJlSktCay9W'>clicking here</a>.
+
