@@ -75,8 +75,22 @@ public class EditProfileModel : PageModel
     public async Task<IActionResult> OnPostDeleteAsync()
     {
         var user = await _userManager.GetUserAsync(User);
+        if (user == null) return NotFound();
+
+        var result = await _userManager.DeleteAsync(user);
+        if (!result.Succeeded)
+        {
+            // If delete failed, show an error and stay on page
+            foreach (var err in result.Errors)
+                ModelState.AddModelError(string.Empty, err.Description);
+            return Page();
+        }
+
         await _signInManager.SignOutAsync();
-        await _userManager.DeleteAsync(user);
+
+        // TempData just in case
+        TempData["StatusMessage"] = "Your account has been deleted.";
         return RedirectToPage("/Index");
     }
+
 }

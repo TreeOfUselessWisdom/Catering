@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Catering.Data;
 using Catering.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Diagnostics;
 
 namespace Catering.Controllers
 {
@@ -50,9 +51,10 @@ namespace Catering.Controllers
         // GET: Item/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.ItemCategories, "CategoryId", "CategoryId");
+            ViewBag.Categories = new SelectList(_context.ItemCategories,"CategoryId","Name");
             return View();
         }
+
 
         // POST: Item/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -61,14 +63,20 @@ namespace Catering.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ItemId,Name,Description,Price,CategoryId")] Item item)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(item);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Log each error
+                foreach (var kv in ModelState)
+                    foreach (var err in kv.Value.Errors)
+                        Debug.WriteLine($"ModelState[{kv.Key}]: {err.ErrorMessage}");
+                // re‑populate dropdown
+                ViewBag.Categories = new SelectList(_context.ItemCategories, "CategoryId", "Name", item.CategoryId);
+                return View(item);
             }
-            ViewData["CategoryId"] = new SelectList(_context.ItemCategories, "CategoryId", "CategoryId", item.CategoryId);
-            return View(item);
+
+            _context.Add(item);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Item/Edit/5
@@ -84,7 +92,7 @@ namespace Catering.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.ItemCategories, "CategoryId", "CategoryId", item.CategoryId);
+            ViewBag.Categories = new SelectList(_context.ItemCategories, "CategoryId", "Name", item.CategoryId);
             return View(item);
         }
 
@@ -120,7 +128,7 @@ namespace Catering.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.ItemCategories, "CategoryId", "CategoryId", item.CategoryId);
+            ViewBag.Categories = new SelectList(_context.ItemCategories, "CategoryId", "Name", item.CategoryId);
             return View(item);
         }
 
