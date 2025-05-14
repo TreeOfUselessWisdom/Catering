@@ -1,30 +1,47 @@
 ﻿@model IEnumerable<Catering.Models.Booking>
-
 @{
     ViewData["Title"] = "My Bookings";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h1>@ViewData["Title"]</h1>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
 
 <table class="table">
     <thead>
-        <tr><th>ID</th><th>Date</th><th>Venue</th><th>Guests</th><th>Amount</th><th>Status</th><th></th></tr>
+        <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Venue</th>
+            <th>Guests</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
     </thead>
     <tbody>
         @foreach (var b in Model)
         {
             <tr>
                 <td>@b.BookingId</td>
-                <td>@b.Date.ToShortDateString()</td>
+                <td>@b.Date:d</td>
                 <td>@b.Venue</td>
                 <td>@b.NumGuests</td>
-                <td>@b.InvoiceAmount.ToString("C")</td>
                 <td>@b.Status</td>
                 <td>
-                    @* cancel stub *@
-                    <a asp-action="Cancel" asp-route-id="@b.BookingId" class="btn btn-sm btn-danger">
-                        Cancel
-                    </a>
+                    @if (b.Status == BookingStatus.Pending)
+                    {
+                        <form asp-action="Cancel" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@b.BookingId" />
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Cancel this booking? A fee may apply.');">
+                                Cancel
+                            </button>
+                            @Html.AntiForgeryToken()
+                        </form>
+                    }
                 </td>
             </tr>
         }

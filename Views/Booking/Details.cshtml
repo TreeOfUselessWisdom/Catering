@@ -1,0 +1,45 @@
+﻿@model Catering.Models.Booking
+@{
+    ViewData["Title"] = $"Booking {Model.BookingId}";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">Customer</dt>
+    <dd class="col-sm-9">@Model.Customer.FullName (@Model.Customer.Email)</dd>
+
+    <dt class="col-sm-3">Date</dt>
+    <dd class="col-sm-9">@Model.Date:d</dd>
+
+    <dt class="col-sm-3">Venue</dt>
+    <dd class="col-sm-9">@Model.Venue</dd>
+
+    <dt class="col-sm-3">Guests</dt>
+    <dd class="col-sm-9">@Model.NumGuests</dd>
+
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">@Model.Status</dd>
+
+    <dt class="col-sm-3">Invoice</dt>
+    <dd class="col-sm-9">@Model.InvoiceAmount.ToString("C")</dd>
+</dl>
+
+<h2>Items</h2>
+<table class="table">
+    <thead><tr><th>Item</th><th>Qty</th><th>Unit Price</th></tr></thead>
+    <tbody>
+        @foreach (var bi in Model.BookingItems)
+        {
+            <tr>
+                <td>@bi.Item.Name</td>
+                <td>@bi.Quantity</td>
+                <td>@bi.Price.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Back to list</a>
+</p>

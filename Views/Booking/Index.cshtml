@@ -1,18 +1,99 @@
-﻿@model IEnumerable<Catering.Models.Booking>
-<h2>Manage Bookings</h2>
+﻿@using System
+@using System.Linq
+@using Catering.Models
+
+@model IEnumerable<Booking>
+@{
+    var statusQuery = Context.Request.Query["status"].ToString();
+    var fromQuery = Context.Request.Query["from"].ToString();
+    var toQuery = Context.Request.Query["to"].ToString();
+}
+
+@{
+    ViewData["Title"] = "Received Bookings";
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Logged in as: @User.Identity.Name</p>
+    <p>Roles:</p>
+    <ul>
+        @foreach (var claim in User.Claims)
+        {
+            <li>@claim.Type: @claim.Value</li>
+        }
+    </ul>
+}
+else
+{
+    <p>You are not logged in.</p>
+}
+
+
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="get" class="row gx-2 mb-3">
+    <div class="col-auto">
+        <select name="status" class="form-select" onchange="this.form.submit()">
+            <option value="">All statuses</option>
+            @foreach (BookingStatus s in Enum.GetValues(typeof(BookingStatus)))
+            {
+                <option value="@s" selected="@(statusQuery == s.ToString())">@s</option>
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <input type="date"
+               name="from"
+               value="@fromQuery"
+               class="form-control"
+               placeholder="From"
+               onchange="this.form.submit()" />
+    </div>
+    <div class="col-auto">
+        <input type="date"
+               name="to"
+               value="@toQuery"
+               class="form-control"
+               placeholder="To"
+               onchange="this.form.submit()" />
+    </div>
+</form>
+
 <table class="table">
-    <thead><tr><th>Booking ID</th><th>Customer</th><th>Date</th><th>Guests</th><th>Status</th><th></th></tr></thead>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Guests</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
     <tbody>
         @foreach (var b in Model)
         {
             <tr>
                 <td>@b.BookingId</td>
                 <td>@b.Customer.FullName</td>
-                <td>@b.Date.ToShortDateString()</td>
+                <td>@b.Date:d</td>
                 <td>@b.NumGuests</td>
                 <td>@b.Status</td>
                 <td>
-                    <a asp-action="UpdateStatus" asp-route-id="@b.BookingId" class="btn btn-sm btn-secondary">Change Status</a>
+                    <a asp-action="Details"
+                       asp-route-id="@b.BookingId"
+                       class="btn btn-sm btn-info">
+                        Details
+                    </a>
+                    @if (b.Status == BookingStatus.Pending)
+                    {
+                        <a asp-action="UpdateStatus"
+                           asp-route-id="@b.BookingId"
+                           class="btn btn-sm btn-success">
+                            Confirm
+                        </a>
+                    }
                 </td>
             </tr>
         }
