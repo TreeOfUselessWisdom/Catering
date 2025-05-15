@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Authentication.Cookies;       // if you call .AddCook
 using Microsoft.AspNetCore.Authentication.Google;        // for GoogleDefaults & .AddGoogle()
 using Microsoft.AspNetCore.Builder;
 using System.Security.Claims;
-
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+var pkCulture = new CultureInfo("ur-PK"); 
+CultureInfo.DefaultThreadCurrentCulture = pkCulture;
+CultureInfo.DefaultThreadCurrentUICulture = pkCulture;
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -57,6 +59,11 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 builder.Services.AddSingleton<IEmailSender, LocalEmailSender>();
 builder.Services.AddControllersWithViews();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+});
 builder.Services.AddRazorPages();
 
 

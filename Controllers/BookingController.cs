@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-[Authorize(Roles = "Customer")]
+[Authorize]
 public class BookingController : Controller
 {
     private readonly AppDbContext _db;
@@ -18,6 +18,7 @@ public class BookingController : Controller
 
     // GET: /Booking/Create
     [HttpGet]
+    [Authorize(Roles = "Customer")]
     public async Task<IActionResult> Create(string catererId, int itemId)
     {
         var user = await _users.GetUserAsync(User);
@@ -40,6 +41,7 @@ public class BookingController : Controller
 
     // POST
     [HttpPost]
+    [Authorize(Roles = "Customer")]
     public async Task<IActionResult> Create(BookingCreateViewModel vm)
     {
         if (!ModelState.IsValid) return View(vm);
@@ -97,10 +99,11 @@ public class BookingController : Controller
 
         if (booking == null) return NotFound();
 
+
         // enforce 7‑day rule
         if ((booking.Date - DateTime.Today).TotalDays < 7)
         {
-            ModelState.AddModelError(string.Empty, "You can only cancel at least 7 days before the event.");
+            TempData["Error"] = "You can only cancel at least 7 days before the event.";
             return RedirectToAction(nameof(MyBookings));
         }
 
@@ -113,7 +116,7 @@ public class BookingController : Controller
         await _db.SaveChangesAsync();
 
         TempData["Message"] = $"Booking #{id} cancelled. Refund: {refund:C} (fee {feePercent}%).";
-        return RedirectToAction(nameof(MyBookings));
+        return RedirectToAction("Payment", new { id = booking.BookingId });
     }
 
 
@@ -160,6 +163,48 @@ public class BookingController : Controller
             .FirstOrDefaultAsync(b => b.BookingId == id && b.CatererId == user.Id);
         if (booking == null) return NotFound();
         return View(booking);
+    }
+
+
+    // GET: /Booking/Payment/5
+    [HttpGet]
+    [Authorize(Roles = "Customer")]
+    public async Task<IActionResult> Payment(int id)
+    {
+        var user = await _users.GetUserAsync(User);
+        var booking = await _db.Bookings
+            .Include(b => b.BookingItems)
+                .ThenInclude(bi => bi.Item)
+            .FirstOrDefaultAsync(b => b.BookingId == id && b.CustomerId == user.Id);
+
+        if (booking == null) return NotFound();
+
+        // If already paid, just redirect to MyBookings
+        if (booking.PaymentStatus == PaymentStatus.Paid)
+            return RedirectToAction("MyBookings");
+
+        return View(booking);
+    }
+
+    // POST: /Booking/Payment/5
+    [HttpPost]
+    [Authorize(Roles = "Customer")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> PaymentConfirm(int id)
+    {
+        var user = await _users.GetUserAsync(User);
+        var booking = await _db.Bookings.FindAsync(id);
+
+        if (booking == null || booking.CustomerId != user.Id)
+            return NotFound();
+
+        // mark paid (mock)
+        booking.PaymentStatus = PaymentStatus.Paid;
+        booking.PaidAt = DateTime.UtcNow;
+        await _db.SaveChangesAsync();
+
+        TempData["Message"] = $"Booking #{id} paid successfully!";
+        return RedirectToAction("MyBookings");
     }
 
 

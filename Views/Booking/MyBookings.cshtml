@@ -10,6 +10,11 @@
     <div class="alert alert-success">@TempData["Message"]</div>
 }
 
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -18,6 +23,7 @@
             <th>Venue</th>
             <th>Guests</th>
             <th>Status</th>
+            <th>Paid?</th>          
             <th>Actions</th>
         </tr>
     </thead>
@@ -30,16 +36,31 @@
                 <td>@b.Venue</td>
                 <td>@b.NumGuests</td>
                 <td>@b.Status</td>
-                <td>
+                <td>@b.PaymentStatus</td>   
+
+                <td class="d-flex gap-1">
+                    @* Show Pay button if still unpaid and pending *@
+                    @if (b.Status == BookingStatus.Pending
+                   && b.PaymentStatus == Catering.Models.PaymentStatus.Unpaid)
+                    {
+                        <a asp-action="Payment"
+                           asp-route-id="@b.BookingId"
+                           class="btn btn-sm btn-primary">
+                            Pay
+                        </a>
+                    }
+
+                    @* Existing Cancel button (only for pending) *@
                     @if (b.Status == BookingStatus.Pending)
                     {
                         <form asp-action="Cancel" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
                             <input type="hidden" name="id" value="@b.BookingId" />
-                            <button type="submit" class="btn btn-sm btn-danger"
+                            <button type="submit"
+                                    class="btn btn-sm btn-danger"
                                     onclick="return confirm('Cancel this booking? A fee may apply.');">
                                 Cancel
                             </button>
-                            @Html.AntiForgeryToken()
                         </form>
                     }
                 </td>

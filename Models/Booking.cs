@@ -15,7 +15,9 @@ namespace Catering.Models
     public int NumGuests { get; set; }
     public decimal InvoiceAmount { get; set; }
     public BookingStatus Status { get; set; }
-     public ICollection<BookingItem> BookingItems { get; set; }
+    public PaymentStatus PaymentStatus { get; set; }
+    public DateTime? PaidAt { get; set; }
+    public ICollection<BookingItem> BookingItems { get; set; }
     public Invoice Invoice { get; set; }
 }
 }

@@ -598,10 +598,10 @@ C:\Users\Awan\source\repos\Project\Catering\obj\Debug\net8.0\staticwebassets\msb
 C:\Users\Awan\source\repos\Project\Catering\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Catering.props
 C:\Users\Awan\source\repos\Project\Catering\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Catering.props
 C:\Users\Awan\source\repos\Project\Catering\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\Awan\source\repos\Project\Catering\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Awan\source\repos\Project\Catering\obj\Debug\net8.0\Catering.csproj.Up2Date
 C:\Users\Awan\source\repos\Project\Catering\obj\Debug\net8.0\Catering.dll
 C:\Users\Awan\source\repos\Project\Catering\obj\Debug\net8.0\refint\Catering.dll
 C:\Users\Awan\source\repos\Project\Catering\obj\Debug\net8.0\Catering.pdb
 C:\Users\Awan\source\repos\Project\Catering\obj\Debug\net8.0\Catering.genruntimeconfig.cache
 C:\Users\Awan\source\repos\Project\Catering\obj\Debug\net8.0\ref\Catering.dll
+C:\Users\Awan\source\repos\Project\Catering\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

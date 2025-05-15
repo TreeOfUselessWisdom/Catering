@@ -1,0 +1,38 @@
+﻿@model Catering.Models.Booking
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<h1>Pay for Booking #@Model.BookingId</h1>
+
+<table class="table">
+    <thead>
+        <tr><th>Item</th><th>Qty</th><th>Unit Price</th><th>Line Total</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var bi in Model.BookingItems)
+        {
+            <tr>
+                <td>@bi.Item.Name</td>
+                <td>@bi.Quantity</td>
+                <td>@bi.Price.ToString("C")</td>
+                <td>@string.Format("{0:C}", bi.Quantity * bi.Price)</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="3" class="text-end">Total:</th>
+            <th>@Model.InvoiceAmount.ToString("C")</th>
+        </tr>
+    </tfoot>
+</table>
+
+<form asp-action="PaymentConfirm" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.BookingId" />
+    <button type="submit" class="btn btn-primary">
+        Pay Now (@Model.InvoiceAmount.ToString("C"))
+    </button>
+    <a asp-action="MyBookings" class="btn btn-secondary ms-2">Cancel</a>
+</form>

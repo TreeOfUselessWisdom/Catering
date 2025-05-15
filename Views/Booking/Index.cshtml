@@ -12,29 +12,13 @@
 @{
     ViewData["Title"] = "Received Bookings";
 }
-@if (User.Identity.IsAuthenticated)
-{
-    <p>Logged in as: @User.Identity.Name</p>
-    <p>Roles:</p>
-    <ul>
-        @foreach (var claim in User.Claims)
-        {
-            <li>@claim.Type: @claim.Value</li>
-        }
-    </ul>
-}
-else
-{
-    <p>You are not logged in.</p>
-}
-
-
 
 <h1>@ViewData["Title"]</h1>
 
-<form method="get" class="row gx-2 mb-3">
+<form method="get" class="row gx-2 mb-3 align-items-end">
     <div class="col-auto">
-        <select name="status" class="form-select" onchange="this.form.submit()">
+        <label for="status" class="form-label">Status</label>
+        <select id="status" name="status" class="form-select" onchange="this.form.submit()">
             <option value="">All statuses</option>
             @foreach (BookingStatus s in Enum.GetValues(typeof(BookingStatus)))
             {
@@ -43,22 +27,25 @@ else
         </select>
     </div>
     <div class="col-auto">
+        <label for="from" class="form-label">From</label>
         <input type="date"
+               id="from"
                name="from"
                value="@fromQuery"
                class="form-control"
-               placeholder="From"
                onchange="this.form.submit()" />
     </div>
     <div class="col-auto">
+        <label for="to" class="form-label">To</label>
         <input type="date"
+               id="to"
                name="to"
                value="@toQuery"
                class="form-control"
-               placeholder="To"
                onchange="this.form.submit()" />
     </div>
 </form>
+
 
 <table class="table">
     <thead>
